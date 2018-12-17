@@ -113,6 +113,11 @@ class OpenIDConnectClient
     private $httpProxy;
 
     /**
+     * @var string socks5 proxy if necessary
+     */
+    private $socks5Proxy;
+
+    /**
      * @var string full system path to the SSL certificate
      */
     private $certPath;
@@ -1053,6 +1058,11 @@ class OpenIDConnectClient
             curl_setopt($ch, CURLOPT_PROXY, $this->httpProxy);
         }
 
+        if (isset($this->socks5Proxy)) {
+            curl_setopt($ch, CURLOPT_PROXYTYPE, CURLPROXY_SOCKS5);
+            curl_setopt($ch, CURLOPT_PROXY, $this->socks5Proxy);
+        }
+
         // Include header in result? (0 = yes, 1 = no)
         curl_setopt($ch, CURLOPT_HEADER, 0);
 
@@ -1145,6 +1155,13 @@ class OpenIDConnectClient
      */
     public function setHttpProxy($httpProxy) {
         $this->httpProxy = $httpProxy;
+    }
+
+    /**
+     * @param $socks5Proxy
+     */
+    public function setSocks5Proxy($socks5Proxy) {
+        $this->socks5Proxy = $socks5Proxy;
     }
 
     /**
