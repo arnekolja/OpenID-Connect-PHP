@@ -1011,7 +1011,7 @@ class OpenIDConnectClient
 
         if($attribute === null) {
             return $this->verifiedClaims;
-        } else if (array_key_exists($attribute, $this->verifiedClaims)) {
+        } else if (is_array($this->verifiedClaims) && array_key_exists($attribute, $this->verifiedClaims)) {
             return $this->verifiedClaims->$attribute;
         } else {
             return null;
