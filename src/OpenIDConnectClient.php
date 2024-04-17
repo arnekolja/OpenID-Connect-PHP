@@ -935,7 +935,7 @@ class OpenIDConnectClient
     private function decodeJWT($jwt, $section = 0) {
 
         $parts = explode(".", (string) $jwt);
-        return json_decode((string) base64url_decode($parts[$section]), null, 512, JSON_THROW_ON_ERROR);
+        return json_decode((string) base64url_decode($parts[$section]));
     }
 
     /**
@@ -1042,7 +1042,7 @@ class OpenIDConnectClient
             $content_type = 'application/x-www-form-urlencoded';
 
             // Determine if this is a JSON payload and add the appropriate content type
-            if (is_object(json_decode($post_body, null, 512, JSON_THROW_ON_ERROR))) {
+            if (is_object(json_decode($post_body))) {
                 $content_type = 'application/json';
             }
 
